@@ -1,0 +1,24 @@
+﻿CREATE TABLE IF NOT EXISTS favorite_recipes (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  user_id TEXT NOT NULL,
+  recipe_id TEXT NOT NULL,
+  recipe_name TEXT NOT NULL,
+  created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  UNIQUE(user_id, recipe_id)
+);
+
+CREATE TABLE IF NOT EXISTS project_records (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  user_id TEXT NOT NULL,
+  username TEXT NOT NULL,
+  chave_projeto TEXT NOT NULL,
+  conteudo TEXT NOT NULL,
+  created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE IF NOT EXISTS discord_users (
+  user_id TEXT PRIMARY KEY,
+  username TEXT NOT NULL,
+  avatar TEXT,
+  updated_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP
+);

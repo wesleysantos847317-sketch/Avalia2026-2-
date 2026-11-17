@@ -1,0 +1,156 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Projeto #28 — P26-2B-8983-AF39-E3CF-C0B3</title>
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <header class="topbar">
+    <div class="topbar-inner">
+      <div class="brand-block">
+        <a class="brand-mark" href="/" aria-label="Página inicial do livro de receitas">🍋</a>
+        <div>
+          <span class="brand-badge">Projeto #28</span>
+          <strong>Livro de Receitas</strong>
+        </div>
+      </div>
+      <div class="discord-badge" id="discordProfile">
+        <a id="discordLoginLink" href="/api/auth/discord" aria-label="Entrar com Discord OAuth2">
+          <span id="discordUserText">Entrar com Discord OAuth2</span>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="card hero-card">
+      <div class="hero-copy">
+        <span class="pill">Receitas para compartilhar</span>
+        <h1>Livro de Receitas Colaborativo com Escalonador de Porções</h1>
+        <p class="desc">
+          Encontre inspiração para a próxima refeição. Pesquise por prato, ingrediente ou tempo de preparo,
+          ajuste as quantidades para o número de pessoas e guarde seus favoritos.
+        </p>
+        <a class="hero-link" href="#receitas">Explorar receitas <span aria-hidden="true">↓</span></a>
+      </div>
+      <div class="hero-metrics">
+        <div class="metric">
+          <strong id="metricRecipes">0</strong>
+          <span>receitas</span>
+        </div>
+        <div class="metric">
+          <strong id="metricFavorites">0</strong>
+          <span>favoritos</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="card toolbar">
+      <label class="field">
+        <span>Buscar receita</span>
+        <input id="searchInput" type="search" placeholder="Ex.: sopa cremosa, tomate, vegetariana, 30 min..." aria-label="Buscar por nome, ingrediente, categoria, dificuldade ou tempo">
+      </label>
+      <label class="field filter-field">
+        <span>Tempo máximo</span>
+        <select id="timeFilter">
+          <option value="all">Qualquer tempo</option>
+          <option value="15">Até 15 minutos</option>
+          <option value="30">Até 30 minutos</option>
+          <option value="45">Até 45 minutos</option>
+          <option value="60">Até 1 hora</option>
+          <option value="90">Até 1h30</option>
+          <option value="120">Até 2 horas</option>
+        </select>
+      </label>
+      <label class="field filter-field">
+        <span>Categoria</span>
+        <select id="categoryFilter">
+          <option value="all">Todas as categorias</option>
+          <option value="Café da manhã">Café da manhã</option>
+          <option value="Almoço e jantar">Almoço e jantar</option>
+          <option value="Vegetariana">Vegetariana</option>
+          <option value="Lanches e entradas">Lanches e entradas</option>
+          <option value="Sobremesas">Sobremesas</option>
+          <option value="Sopas">Sopas</option>
+        </select>
+      </label>
+      <label class="field filter-field">
+        <span>Dificuldade</span>
+        <select id="difficultyFilter">
+          <option value="all">Qualquer dificuldade</option>
+          <option value="Fácil">Fácil</option>
+          <option value="Médio">Médio</option>
+        </select>
+      </label>
+      <label class="field filter-field">
+        <span>Ordenar por</span>
+        <select id="sortFilter">
+          <option value="relevance">Mais relevantes</option>
+          <option value="time">Menor tempo</option>
+          <option value="name">Nome (A–Z)</option>
+          <option value="popular">Favoritos primeiro</option>
+        </select>
+      </label>
+      <label class="favorite-filter">
+        <input id="favoritesOnlyFilter" type="checkbox">
+        <span>Mostrar só favoritos</span>
+      </label>
+      <button id="resetFiltersBtn" class="btn-secondary reset-filters" type="button">Limpar filtros</button>
+    </section>
+
+    <div class="workspace-grid">
+      <section class="card recipes-panel" id="receitas">
+        <div class="section-header">
+          <div>
+            <span class="section-kicker">Escolha seu próximo prato</span>
+            <h2>Receitas para experimentar</h2>
+          </div>
+          <span class="recipe-total" id="visibleRecipeCount" aria-live="polite"></span>
+        </div>
+        <div id="recipeGrid" class="recipe-grid" aria-live="polite"></div>
+      </section>
+
+      <aside class="card detail-panel">
+        <div id="recipeDetail" class="recipe-detail">
+          <p>Selecione uma receita para visualizar o detalhe, as porções e o modo de preparo.</p>
+        </div>
+      </aside>
+    </div>
+
+    <section class="card personal-book">
+      <div class="section-header">
+        <h2>Livro pessoal</h2>
+      </div>
+      <div id="favoritesList" class="favorites-list"></div>
+    </section>
+
+    <section class="card diagnostics">
+      <details>
+        <summary>Diagnóstico técnico da plataforma</summary>
+        <div class="section-header">
+          <h2>Registros de status</h2>
+        </div>
+        <div class="form-row">
+          <input class="input-text" id="recordInput" type="text" placeholder="Compartilhe um registro de diagnóstico...">
+          <button class="btn-primary" id="sendBtn" type="button">Registrar no Cloudflare D1</button>
+        </div>
+        <div id="statusMessage" class="status-message"></div>
+        <ul class="records-list" id="recordsList">
+          <li>Carregando registros persistidos...</li>
+        </ul>
+      </details>
+    </section>
+  </main>
+
+  <footer id="projectFooter">
+    <strong>Projeto #28 · Livro de Receitas</strong>
+    <span>WESLEY DOS SANTOS DE SOUZA · Turma 2ESBN · RA 2025104728</span>
+    <span>Chave Única de Auditoria: <code>P26-2B-8983-AF39-E3CF-C0B3</code> · Licenciado sob MIT</span>
+  </footer>
+
+  <script src="/recipes.js"></script>
+  <script src="/app.js"></script>
+</body>
+</html>
